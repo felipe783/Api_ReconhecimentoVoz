@@ -1,5 +1,8 @@
 package dio.budgeting.domain;
 
+import lombok.Getter;
+
+@Getter
 public class Transaction {
     private TransactionId id;
     private String description;

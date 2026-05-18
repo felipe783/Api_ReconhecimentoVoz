@@ -1,0 +1,23 @@
+package dio.budgeting.aplication;
+
+import dio.budgeting.aplication.input.PersistTransactionInput;
+import dio.budgeting.aplication.output.TransactionOutput;
+import dio.budgeting.domain.Transaction;
+import dio.budgeting.domain.TransactionRepository;
+
+public class PersistTransactionUseCase {
+    private final TransactionRepository transactionRepository;
+
+    public PersistTransactionUseCase(TransactionRepository transactionRepository) {
+        this.transactionRepository = transactionRepository;
+    }
+
+
+    public Transaction execute(PersistTransactionInput input){
+        var transaction = transactionRepository.save(new Transaction(input.description(), input.amount(), input.category()));
+
+        return TransactionOutput.from(transaction);
+    }
+
+
+}
