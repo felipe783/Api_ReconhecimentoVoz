@@ -13,7 +13,7 @@ public class PersistTransactionUseCase {
     }
 
 
-    public Transaction execute(PersistTransactionInput input){
+    public TransactionOutput execute(PersistTransactionInput input){
         var transaction = transactionRepository.save(new Transaction(input.description(), input.amount(), input.category()));
 
         return TransactionOutput.from(transaction);
