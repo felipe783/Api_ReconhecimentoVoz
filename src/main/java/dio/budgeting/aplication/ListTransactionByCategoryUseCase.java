@@ -4,6 +4,8 @@ package dio.budgeting.aplication;
 import dio.budgeting.aplication.output.TransactionOutput;
 import dio.budgeting.domain.Category;
 import dio.budgeting.domain.TransactionRepository;
+import org.springframework.ai.tool.annotation.Tool;
+import org.springframework.ai.tool.annotation.ToolParam;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,7 +19,8 @@ public class ListTransactionByCategoryUseCase  {
         this.transactionRepository = transactionRepository;
     }
 
-    public List<TransactionOutput> execute(Category category){
+    @Tool(description = "Lista das transacoes financeiras por categoria")
+    public List<TransactionOutput> execute(@ToolParam(description = "Categoria de uma transacao") Category category){
         return transactionRepository.findAllbyCategory(category).stream().map(TransactionOutput::from).toList();
     }
 }
