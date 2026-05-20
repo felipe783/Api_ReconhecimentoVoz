@@ -12,11 +12,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/transactions")
-public class TransiitonController {
+public class TransitonController {
     private final PersistTransactionUseCase persistTransactionUseCase;
     private final ListTransactionByCategoryUseCase listTransactionByCategoryUseCase;
 
-    public TransiitonController(PersistTransactionUseCase persistTransactionUseCase, ListTransactionByCategoryUseCase listTransactionByCategoryUseCase) {
+    public TransitonController(PersistTransactionUseCase persistTransactionUseCase, ListTransactionByCategoryUseCase listTransactionByCategoryUseCase) {
         this.persistTransactionUseCase = persistTransactionUseCase;
         this.listTransactionByCategoryUseCase = listTransactionByCategoryUseCase;
     }
