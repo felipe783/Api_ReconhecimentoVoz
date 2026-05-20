@@ -23,10 +23,9 @@ public class TransactionEntity {
     private UUID Id;
     private String description;
     private long amount;
+
+    @Enumerated(EnumType.STRING)
     private Category category;
-
-
-
 
     public static TransactionEntity from(Transaction transaction){
         return new  TransactionEntity(transaction.getId().uuid(),
