@@ -16,7 +16,7 @@ public class PersistTransactionUseCase {
         this.transactionRepository = transactionRepository;
     }
 
-    @Tool(description = "persiste uma nova transacao financeira")
+    @Tool(name = "persist-transaction" , description = "persiste uma nova transacao financeira")
     public TransactionOutput execute(PersistTransactionInput input){
         var transaction = transactionRepository.save(new Transaction(input.description(), input.amount(), input.category()));
 

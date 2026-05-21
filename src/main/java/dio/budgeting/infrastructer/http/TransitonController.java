@@ -6,14 +6,17 @@ import dio.budgeting.domain.Category;
 import dio.budgeting.infrastructer.http.request.TransactionRequest;
 import dio.budgeting.infrastructer.http.response.TransactionResponse;
 import org.springframework.ai.audio.transcription.TranscriptionModel;
+import org.springframework.ai.audio.tts.TextToSpeechModel;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
 import java.util.List;
 
 
@@ -24,34 +27,22 @@ public class TransitonController {
     private final ListTransactionByCategoryUseCase listTransactionByCategoryUseCase;
     private final TranscriptionModel transcriptionModel;
     private final ChatClient chatClient;
-
-    @Value("classpath:/prompts/system.st")
-    private Resource systemPrompt;
+    private final TextToSpeechModel textToSpeechModel;
 
     public TransitonController(PersistTransactionUseCase persistTransactionUseCase,
                                ListTransactionByCategoryUseCase listTransactionByCategoryUseCase,
                                TranscriptionModel transcriptionModel,
+                               @Value("classpath:/prompts/system.st") Resource systemPrompt,
                                ChatClient.Builder chatClientBuilder,
-
-    ) {
+                               TextToSpeechModel textToSpeechModel) throws IOException {
         this.persistTransactionUseCase = persistTransactionUseCase;
         this.listTransactionByCategoryUseCase = listTransactionByCategoryUseCase;
         this.transcriptionModel = transcriptionModel;
         this.chatClient = chatClientBuilder
-                .defaultSystem(systemPrompt)
-                .defaultTools(PersistTransactionUseCase.class, ListTransactionByCategoryUseCase.class )
+                .defaultSystem(systemPrompt.getContentAsString(Charset.defaultCharset()))
+                .defaultTools(persistTransactionUseCase, listTransactionByCategoryUseCase )
                 .build();
-    }
-
-    public TransitonController(
-            PersistTransactionUseCase persistTransactionUseCase,
-            ListTransactionByCategoryUseCase listTransactionByCategoryUseCase,
-            TranscriptionModel transcriptionModel,
-            ChatClient chatClient) {
-        this.persistTransactionUseCase = persistTransactionUseCase;
-        this.listTransactionByCategoryUseCase = listTransactionByCategoryUseCase;
-        this.transcriptionModel = transcriptionModel;
-        this.chatClient = chatClient;
+        this.textToSpeechModel = textToSpeechModel;
     }
 
     @PostMapping
@@ -66,14 +57,20 @@ public class TransitonController {
         return listTransactionByCategoryUseCase.execute(category).stream().map(TransactionResponse::from).toList();
     }
 
-    @PostMapping(value = "/ai", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
-    String transcribe(@RequestParam("file")MultipartFile file){
-        var resource = file.getResource();
-        var userMessage = transcriptionModel.transcribe(resource);
-
+    @PostMapping(value = "/ai", consumes = MediaType.MULTIPART_FORM_DATA_VALUE, produces = "audio/mp3")
+    ResponseEntity<Resource>  transcribe(@RequestParam("file")MultipartFile file){
+        var userMessage = transcriptionModel.transcribe(file.getResource());
         var result = chatClient.prompt().user(userMessage).call().content();
 
-        return result;
+        byte[] audio = textToSpeechModel.call(result);
+        var resource = new ByteArrayResource(audio);
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION,
+                        ContentDisposition.attachment()
+                                .filename("audio.mp3")
+                                .build()
+                                .toString())
+                .body(resource);
     }
 }
 
