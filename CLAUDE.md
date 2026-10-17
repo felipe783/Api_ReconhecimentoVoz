@@ -38,7 +38,7 @@ Pacote `src/main/java/dio/budgeting/`:
 
 ```powershell
 .\gradlew.bat bootRun     # exige JDK 25 e um MySQL acessível
-.\gradlew.bat test        # os testes de IA só rodam com OPENAI_API_KEY no ambiente do processo
+.\gradlew.bat test        # BudgetingApplicationTests precisa de MySQL; os de IA só rodam com OPENAI_API_KEY no ambiente
 .\gradlew.bat build
 ```
 
