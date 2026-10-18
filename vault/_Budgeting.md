@@ -1,6 +1,7 @@
 ---
+Tipo: projeto
 Projeto: Budgeting
-Status: concluído (projeto de curso)
+Status: concluido
 Stack:
   - Java 25
   - Spring Boot 4.0.6
@@ -8,7 +9,7 @@ Stack:
   - Spring Data JPA
   - MySQL
   - Gradle
-Codigo: "E:/Downloads/!Faculdade/budgeting"
+Codigo: "budgeting"
 Repositorio: "https://github.com/felipe783/Api_ReconhecimentoVoz"
 Atualizado: 2026-10-17
 ---
@@ -16,7 +17,7 @@ Atualizado: 2026-10-17
 
 API **Spring Boot** de **controle de gastos por voz**: o usuário envia um áudio dizendo o gasto, a API transcreve com o Whisper, um modelo da OpenAI (`gpt-4o-mini`) entende o pedido e usa *tools* para **registrar** ou **listar** transações no MySQL, e a resposta volta **em áudio** (TTS). Também expõe as operações por REST comum e endpoints de teste dos modelos de IA.
 
-- **Código:** raiz deste repositório; a documentação fica em `vault/` (local: `E:\Downloads\!Faculdade\budgeting`)
+- **Código:** raiz deste repositório; a documentação fica em `vault/`
 - **Entrada:** HTTP na porta padrão do Spring (8080): JSON em `/transactions`, áudio `multipart/form-data` em `/transactions/ai`
 - **Saída:** JSON das transações; áudio MP3 nas rotas de voz; registros na tabela de transações do MySQL
 - **Origem:** pacote `dio.budgeting` e último commit "Final fixes, project completed": projeto do **Bootcamp NTT DATA Backend Java com Spring AI** (DIO) [PROVÁVEL]

@@ -57,4 +57,4 @@ Ao alterar comportamento, atualize na mesma tarefa:
 2. A nota do módulo afetado (tabela acima).
 3. O `README.md`, se mudar comando, rota ou variável de ambiente.
 
-Convenções do vault (o mesmo do Obsidian em `Contexto Projetos/Budgeting`, via junction): frontmatter na linha 1; nomes de nota únicos no vault inteiro (notas genéricas levam `(Budgeting)`, requisitos `BG-RF NN`); links `[[Nome da Nota]]`; separe o que foi **executado** do que foi **lido no código**, com data.
+Convenções do vault (o mesmo do Obsidian em `Contexto Projetos/Budgeting`, via junction): frontmatter conforme a tabela de **Convenções** de `E:/Downloads/!Faculdade/Contexto Projetos/Contexto Geral.md` (única definição); nomes de nota únicos no vault inteiro (notas genéricas levam `(Budgeting)`, requisitos `BG-RF NN`); links `[[Nome da Nota]]`; separe o que foi **executado** do que foi **lido no código**, com data.
