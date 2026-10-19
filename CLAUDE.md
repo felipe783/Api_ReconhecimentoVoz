@@ -22,7 +22,7 @@ O índice abaixo é carregado em toda sessão. As notas detalhadas ficam em `vau
 | Endpoints de teste dos modelos | `vault/modulos/IA/Endpoints de IA.md` |
 | Testes e quais chamam a OpenAI | `vault/modulos/Testes Automatizados (Budgeting).md` |
 
-Conceitos transversais (camadas, configuração, segredos, persistência…), com aprendizados deste e de outros projetos: `E:/Downloads/!Faculdade/Contexto Projetos/Conhecimento/_Conhecimento.md`. Leia sob demanda, quando a tarefa tocar o assunto.
+Conceitos transversais (camadas, configuração, segredos, persistência…), com aprendizados deste e de outros projetos: `../Contexto-Projetos/Conhecimento/_Conhecimento.md`. Leia sob demanda, quando a tarefa tocar o assunto.
 
 ## Mapa do código
 
@@ -57,4 +57,4 @@ Ao alterar comportamento, atualize na mesma tarefa:
 2. A nota do módulo afetado (tabela acima).
 3. O `README.md`, se mudar comando, rota ou variável de ambiente.
 
-Convenções do vault (o mesmo do Obsidian em `Contexto Projetos/Budgeting`, via junction): frontmatter conforme a tabela de **Convenções** de `E:/Downloads/!Faculdade/Contexto Projetos/Contexto Geral.md` (única definição); nomes de nota únicos no vault inteiro (notas genéricas levam `(Budgeting)`, requisitos `BG-RF NN`); links `[[Nome da Nota]]`; separe o que foi **executado** do que foi **lido no código**, com data.
+Convenções do vault (o mesmo do Obsidian em `Contexto-Projetos/Budgeting`, via junction): frontmatter conforme a tabela de **Convenções** de `../Contexto-Projetos/Contexto Geral.md` (única definição); nomes de nota únicos no vault inteiro (notas genéricas levam `(Budgeting)`, requisitos `BG-RF NN`); links `[[Nome da Nota]]`; separe o que foi **executado** do que foi **lido no código**, com data.
